@@ -14,22 +14,25 @@ RUN groupadd -g ${GID} ${USER} && \
 
 # Install packages
 RUN apt-get update && apt-get install --no-install-recommends -y \
+    ca-certificates \
     locales \
     language-pack-ja \
     git \
     curl \
     wget \
     vim \
-    less && \
+    less \
+    zip \
+    unzip && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install hadolint
-RUN wget ${HADOLINT_URL} -q --no-check-certificate -O /usr/local/bin/hadolint && \
+RUN wget ${HADOLINT_URL} -q -O /usr/local/bin/hadolint && \
     chmod +x /usr/local/bin/hadolint
 
 # Install git-completion
-RUN wget ${GIT_COMPLETION_URL} -q --no-check-certificate -O ${HOMEDIR}/.git-completion.bash && \
-    wget ${GIT_PROMPT_URL} -q --no-check-certificate -O ${HOMEDIR}/.git-prompt.sh
+RUN wget ${GIT_COMPLETION_URL} -q -O ${HOMEDIR}/.git-completion.bash && \
+    wget ${GIT_PROMPT_URL} -q -O ${HOMEDIR}/.git-prompt.sh
 
 # Set Timezone to JST
 RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
