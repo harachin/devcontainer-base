@@ -1,0 +1,21 @@
+{
+  "name": "Dev Container",
+  "remoteUser": "developer",
+  "build": {
+    "dockerfile": "${localWorkspaceFolder}/Dockerfile"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "MS-CEINTL.vscode-language-pack-ja",
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        "exiasr.hadolint",
+        "ms-azuretools.vscode-docker"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  }
+}
