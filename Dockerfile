@@ -15,6 +15,7 @@ RUN groupadd -g ${GID} ${USER} && \
 # Install packages
 RUN apt-get update && apt-get install --no-install-recommends -y \
     ca-certificates \
+    openssh-client \
     locales \
     language-pack-ja \
     git \
