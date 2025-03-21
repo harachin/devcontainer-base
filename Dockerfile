@@ -18,6 +18,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     locales \
     language-pack-ja \
     git \
+    gnupg2 \
     curl \
     wget \
     vim \
