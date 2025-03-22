@@ -8,16 +8,16 @@ ARG UID=1001
 ARG GID=1001
 ARG HOMEDIR=/home/${USER}
 
-# Set developer user.
-RUN groupadd -g ${GID} ${USER} && \
-    useradd -m -u ${UID} -g ${GID} -s /bin/bash -l ${USER}
-
 # Install packages
+ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install --no-install-recommends -y \
+    sudo \
     ca-certificates \
+    openssh-client \
     locales \
     language-pack-ja \
     git \
+    gnupg2 \
     curl \
     wget \
     vim \
@@ -29,6 +29,12 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 # Install hadolint
 RUN wget ${HADOLINT_URL} -q -O /usr/local/bin/hadolint && \
     chmod +x /usr/local/bin/hadolint
+
+# Set developer user.
+RUN groupadd -g ${GID} ${USER} && \
+    useradd -m -u ${UID} -g ${GID} -s /bin/bash -l ${USER} && \
+    usermod -aG sudo ${USER} && \
+    echo "${USER} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 # Install git-completion
 RUN wget ${GIT_COMPLETION_URL} -q -O ${HOMEDIR}/.git-completion.bash && \
