@@ -1,6 +1,7 @@
 {
   "name": "Dev Container",
   "remoteUser": "developer",
+	"postCreateCommand": "sudo chown -R developer:developer .",
   "build": {
     "dockerfile": "${localWorkspaceFolder}/Dockerfile"
   },
